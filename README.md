@@ -34,7 +34,7 @@ $lsusb | grep LG
 
 As my case the results contain `Bus 003 Device 006: ID 043e:9a63 LG Electronics USA, Inc. LG UltraFine Display Controls`
 
-in `lguf` library change do the following modification:
+in `lguf` library do the following modification:
 ```
 // lguf.go
 
