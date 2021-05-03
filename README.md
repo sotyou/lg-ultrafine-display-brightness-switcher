@@ -3,7 +3,7 @@
 `lg-ultrafine-brightness-switcher` is a GUI Application build from [wails](https://wails.app/) to interfaces with the LG UltraFine 4K monitor in order to adjust brightness from Linux.(Because this monitor was designed specifically for Apple computers and thus has no physical buttons. Without the built-in features of macOS, adjusting brightness on this monitor wasn't possible.)
 
 Note: I have tested the UltraFine 4K 23.7" model 24MD4KL. The old 4k 22 inch model or old&new 27 inch 5k models are not tested.
-You may need to manually change the Device Id in `go-lguf` library.
+You may need to manually change the Device ID in `go-lguf` library.
 
 ## Usage
 
@@ -20,6 +20,39 @@ $wails build
 $sudo build/ultrafine-brightness-slider
 
 ```
+
+## If this doesn't work, try change Device ID
+
+in terminal run
+```
+$lsusb | grep LG
+```
+
+As my case the results contain `Bus 003 Device 006: ID 043e:9a63 LG Electronics USA, Inc. LG UltraFine Display Controls`
+
+in `lguf` library change do the following modification:
+```
+// lguf.go
+
+// before
+const (
+	MaxBrightness uint16 = 54000
+	MinBrightness uint16 = 540
+
+	VendorID  gousb.ID = 0x043e
+	ProductID gousb.ID = 0x9a40
+)
+
+// after
+const (
+	MaxBrightness uint16 = 54000
+	MinBrightness uint16 = 540
+
+	VendorID  gousb.ID = 0x043e
+	ProductID gousb.ID = 0x9a63
+)
+```
+
 
 ## License & Credits
 
